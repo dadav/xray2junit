@@ -1,8 +1,3776 @@
 {
-  "vulnerabilities": [],
-  "securityViolations": [],
-  "licensesViolations": [],
-  "licenses": [],
-  "operationalRiskViolations": [],
-  "errors": []
+  "vulnerabilities": [
+    {
+      "summary": "net/url in Go before 1.11.13 and 1.12.x before 1.12.8 mishandles malformed hosts in URLs, leading to an authorization bypass in some applications. This is related to a Host field with a suffix appearing in neither Hostname() nor Port(), and is related to a non-numeric port number. For example, an attacker can compose a crafted javascript:// URL that results in a hostname of google.com.",
+      "severity": "Critical",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.11.13]",
+        "[1.12.8]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2019-14809",
+          "cvssV2": "7.5",
+          "cvssV3": "9.8"
+        }
+      ],
+      "issueId": "XRAY-85927",
+      "references": [
+        "http://lists.opensuse.org/opensuse-security-announce/2019-09/msg00038.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-09/msg00021.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-09/msg00011.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-09/msg00002.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-08/msg00076.html",
+        "https://access.redhat.com/errata/RHSA-2019:3433",
+        "https://groups.google.com/forum/#!topic/golang-announce/0uuMm1BwpHE",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4BBP27PZGSY6OP6D26E5FW4GZKBFHNU7/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/LYO6E3H34C346D2E443GLXK7OK6KIYIQ/",
+        "https://www.debian.org/security/2019/dsa-4503",
+        "https://groups.google.com/forum/#!topic/golang-announce/65QixT3tcmg",
+        "https://github.com/golang/go/issues/29098",
+        "https://seclists.org/bugtraq/2019/Aug/31"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Insufficient validation in Golang's net/url may lead to authentication bypass in specific scenarios.",
+        "details": "Go, also known as Golang, is an open-source, compiled, and statically typed programming language designed by Google. It is built to be simple, high-performing, readable, and efficient.\r\n\r\nGolang net/url mishandles malformed URLs, which may result in authentication bypass in specific scenarios.\r\n\r\nGolang `net/url` can parse the hostname and port of malformed URLs, such as `javascript://%250aalert(1)+'aa@google.com/a'a`, and interpret them as valid hostname/ports (ex. referring to `google.com` in the previous example). Relying on this library to validate an attacker-controlled URL may have a security impact, as potentially dangerous elements are ignored.",
+        "severity": "Low",
+        "severityReasons": [
+          {
+            "name": "The impact of exploiting the issue depends on the context of surrounding software. A severe impact such as RCE is not guaranteed.",
+            "description": "The behavior is only relevant for very specific and unlikely use cases of the API, in which a user supplied URL is considered validated after it is parsed by `net/url`. The impact of the authentication bypass depends on the 1st-party code that handles the parsed URL.",
+            "isPositive": true
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find a remote input that propagates into a `url.Hostname` or `url.Port` API call",
+            "isPositive": true
+          },
+          {
+            "name": "The issue has a detailed technical explanation published, that can aid in exploit development"
+          }
+        ]
+      }
+    },
+    {
+      "summary": "Go before 1.16.9 and 1.17.x before 1.17.2 has a Buffer Overflow via large arguments in a function invocation from a WASM module, when GOARCH=wasm GOOS=js is used.",
+      "severity": "Critical",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.16.9]",
+        "[1.17.2]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-38297",
+          "cvssV2": "7.5",
+          "cvssV3": "9.8"
+        }
+      ],
+      "issueId": "XRAY-187759",
+      "references": [
+        "https://groups.google.com/forum/#!forum/golang-announce",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4OFS3M3OFB24SWPTIAPARKGPUMQVUY6Z/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ON7BQRRJZBOR5TJHURBAB3WLF4YXFC6Z/",
+        "https://security.netapp.com/advisory/ntap-20211118-0006/",
+        "https://groups.google.com/g/golang-announce/c/AEBu9j7yj5A"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "A buffer overflow in Go's Wasm module could lead to sandboxed remote code execution when parsing malicious command line arguments.",
+        "details": "[Go](https://golang.org/) is an open source programming language developed by Google with the same syntax of C language but with memory safety, garbage collection, structural typing, and CSP-style concurrency.\r\n\r\nA bug was found in the way Go handles function invocation from Wasm module. In case the user builds a Wasm module in Go - \r\n```\r\nGOOS=js GOARCH=wasm go build -o main.wasm  \r\n```\r\n\r\nAnd subsequently loads the Wasm module in the browser, **while passing arguments to it** -\r\n```js\r\n\u003cscript\u003e\r\n        const params = new URLSearchParams(window.location.search)\r\n        const go = new Go();\r\n        WebAssembly.instantiateStreaming(fetch(\"main.wasm\"), go.importObject).then((result) =\u003e {\r\n            go.argv = ['js', 'foo', params.get('external_argument')];\r\n            go.run(result.instance);\r\n        });\r\n\u003c/script\u003e\r\n```\r\nIf an attacker can control one of the parameters passed to `go.argv` and subsequently cause the entire command line (`argv`) to exceed 4096 characters, then an attacker-controlled buffer overflow will occur. The attacker can use this buffer overflow to replace the entire contents if the compiled Wasm module and achieve arbitrary code execution in the browser's JavaScript (Wasm) sandbox.\r\n\r\nIn the example above, since `external_argument` comes from a query parameter, this would be achieved by surfing to a URL such as -\r\n`https://test.com/?external_argument=AAAAAA...{repeat 4096 times}...`\r\n\r\nCurrently, no public exploit or technical writeup were published for this issue.\r\n\r\nThe impact of exploiting the issue is not severe, since the attacker's code will run in the browser's JavaScript (Wasm) sandbox. This means the impact is the same as loading an attacker-controlled Wasm module, or alternatively the same impact as an XSS attack on the vulnerable web page. For example - page cookies can be stolen, but arbitrary code execution cannot be directly achieved.",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The vulnerable web page must load a Go Wasm module (`go.run(result.instance)`), and use an attacker-controlled parameter as one of the arguments in `go.argv`",
+            "isPositive": true
+          },
+          {
+            "name": "The issue cannot result in a severe impact (such as remote code execution)",
+            "description": "Even if RCE is achieved, the impact is similar to an XSS attack, since the attacker's code runs inside the browser's JavaScript sandbox",
+            "isPositive": true
+          },
+          {
+            "name": "The issue is trivial to exploit and does not require a published writeup or PoC",
+            "description": "An attacker can use the buffer overflow to overwrite the entire Wasm module with an attacker-supplied Wasm module"
+          }
+        ],
+        "remediation": "##### Development mitigations\n\nWhen running the Wasm binary - check that the total length of `go.argv` is smaller than 4k -\r\n\r\n```js\r\nconst maxSize = 4096;\r\nfunction checkWasmCmd(arr) {\r\n    var len = arr.reduce(\r\n        (cur, elem) =\u003e {\r\n            //pad each element to 8 bytes\r\n            return cur + elem.length + (8 - (elem.length % 8))\r\n        }, 0\r\n    );\r\n    \r\n    if (len \u003c= maxSize) {\r\n        return true;\r\n    }\r\n    return false;\r\n}\r\n\r\nfunction runWasm(wasmPath, args) {\r\n    var go = new Go();\r\n    WebAssembly.instantiateStreaming(fetch(wasmPath), go.importObject).then((result) =\u003e {\r\n        go.argv = go.argv.concat(args);\r\n        if (checkWasmCmd(go.argv)) {\r\n            go.run(result.instance);\r\n        } else {\r\n            console.log('Failed to run Wasm binary: command line is too long');\r\n        }\r\n    });\r\n}\r\n```"
+      }
+    },
+    {
+      "summary": "Go through 1.12.5 on Windows mishandles process creation with a nil environment in conjunction with a non-nil token, which allows attackers to obtain sensitive information or gain privileges.",
+      "severity": "Critical",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.12.6]",
+        "[1.13beta1]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2019-11888",
+          "cvssV2": "7.5",
+          "cvssV3": "9.8"
+        }
+      ],
+      "issueId": "XRAY-82071",
+      "references": [
+        "https://go-review.googlesource.com/c/go/+/176619"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Unsafe environment passing in Go on Windows could lead to local privilege escalation or data leakage when creating a child process with modified privileges.",
+        "details": "Go-based applications that are built and run for Windows OS (only) and that create new processes using the `os.startProcess` API without providing an environment but while providing a token (both are given in the `attr *ProcAttr`  argument, `attr.Env` and `attr.Sys.Token`) could be vulnerable to privilege escalation or information leak. This vulnerability is very specific to the application and would only be relevant if the parent process should have different privileges than the process it creates. When a developer does not specify an environment, `os.startProcess` would use the existing environment and not use the environment from the token that the child process is created with. If the parent environment is less privileged than the intended one for the child, it could allow the parent to attack the privileged child by changing it in ways that could affect its execution (such as the PATH environment variables) which would lead to privilege escalation. If the parent environment is more privileged, it might allow the child process to access information and lead to a data leak.",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The passed environment might not allow for code injection or information leak, and must be researched by the attacker",
+            "isPositive": true
+          },
+          {
+            "name": "The issue cannot result in a severe impact (such as remote code execution)",
+            "description": "Non-kernel local privilege escalation or contextual information leak",
+            "isPositive": true
+          },
+          {
+            "name": "The issue can be exploited by attackers over the network"
+          }
+        ],
+        "remediation": "##### Deployment mitigations\n\nWhen calling `os.startProcess` don't pass a `nil` environment in `attr *ProcAttr` when using a non-nil token."
+      }
+    },
+    {
+      "summary": "Curve.IsOnCurve in crypto/elliptic in Go before 1.16.14 and 1.17.x before 1.17.7 can incorrectly return true in situations with a big.Int value that is not a valid field element.",
+      "severity": "Critical",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.16.14]",
+        "[1.17.7]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-23806",
+          "cvssV2": "6.4",
+          "cvssV3": "9.1"
+        }
+      ],
+      "issueId": "XRAY-198036",
+      "references": [
+        "https://www.oracle.com/security-alerts/cpujul2022.html",
+        "https://lists.debian.org/debian-lts-announce/2022/04/msg00018.html",
+        "https://lists.debian.org/debian-lts-announce/2022/04/msg00017.html",
+        "https://groups.google.com/g/golang-announce/c/SUsQn0aSgPQ",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://security.netapp.com/advisory/ntap-20220225-0006/"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Go before 1.12.11 and 1.3.x before 1.13.2 can panic upon an attempt to process network traffic containing an invalid DSA public key. There are several attack scenarios, such as traffic from a client to a server that verifies client certificates.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.12.11]",
+        "[1.13.2]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2019-17596",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-90558",
+      "references": [
+        "http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00043.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00044.html",
+        "https://access.redhat.com/errata/RHSA-2020:0329",
+        "https://access.redhat.com/errata/RHSA-2020:0101",
+        "https://lists.debian.org/debian-lts-announce/2021/03/msg00015.html",
+        "https://lists.debian.org/debian-lts-announce/2021/03/msg00014.html",
+        "https://www.arista.com/en/support/advisories-notices/security-advisories/10134-security-advisory-46",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5VS3HPSE25ZSGS4RSOTADC67YNOHIGVV/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/WVOWGM7IQGRO7DS2MCUMYZRQ4TYOZNAS/",
+        "https://www.debian.org/security/2019/dsa-4551",
+        "https://security.netapp.com/advisory/ntap-20191122-0005/",
+        "https://groups.google.com/d/msg/golang-announce/lVEm7llp0w0/VbafyRkgCgAJ",
+        "https://github.com/golang/go/issues/34960"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Multiple crypto certificate verification (DSA, X.509) functions of the Go standard library are vulnerable to DoS if provided with untrusted user input.",
+        "details": "Go, also known as Golang, is an open-source, compiled, and statically typed programming language designed by Google. It is built to be simple, high-performing, readable, and efficient.\r\n\r\nGo-based applications could be vulnerable to DoS (Denial of Service) caused by an application panic if they provide untrusted user input as arguments to the following signature verifications function from the [crypto](https://pkg.go.dev/crypto) package of the Go standard library - \r\n\r\n- `crypto/dsa.Verify` (see [here](https://pkg.go.dev/crypto/dsa#Verify))\r\n- `crypto/x509.(*CertificateRequest).CheckSignature` (see [here](https://pkg.go.dev/crypto/x509#Certificate.CheckSignature))\r\n\r\nIndirectly, this can also affect applications that implement a HTTPS client by using the Go [net/http package](https://pkg.go.dev/net/http). Note that there is no effect on HTTP servers as they recover from this issue. If the HTTPS client verifies the certificates of servers it connects to, and it might connect to malicious servers, it is possible for a malicious HTTPS server (or an attacker performing a network MITM attack) to trigger the vulnerability in the `crypto/x509.Verify` function by supplying a maliciously crafted X.509 certificate chain. As the certificate chain doesn't have to be signed by a trusted root for the vulnerable code to be triggered, an attacker can supply a self-signed chain, making an attack far more likely.",
+        "severity": "High",
+        "severityReasons": [
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find a remote input that propagates into the `crypto/dsa.Verify` or `crypto/x509.(*CertificateRequest).CheckSignature` API calls\r\n\r\nIn some scenarios, such as TLS clients verifying the TLS server certificate, the attack vector is trivial (a malicious HTTPS server can provide a crafted TLS certificate and crash the client)",
+            "isPositive": true
+          },
+          {
+            "name": "The issue has a detailed technical explanation published, that can aid in exploit development"
+          },
+          {
+            "name": "The issue has an exploit published",
+            "description": "Exploit demonstrates DoS on a simple Go HTTP server"
+          }
+        ]
+      }
+    },
+    {
+      "summary": "In Go before 1.15.13 and 1.16.x before 1.16.5, there can be a panic for a large exponent to the math/big.Rat SetString or UnmarshalText method.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.15.13]",
+        "[1.16.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-33198",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-180700",
+      "references": [
+        "https://groups.google.com/g/golang-announce/c/RgCMkAEQjSI",
+        "https://groups.google.com/g/golang-announce",
+        "https://security.gentoo.org/glsa/202208-02"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Large handshake records may cause panics in crypto/tls. Both clients and servers may send large TLS handshake records which cause servers and clients, respectively, to panic when attempting to construct responses. This affects all TLS 1.3 clients, TLS 1.2 clients which explicitly enable session resumption (by setting Config.ClientSessionCache to a non-nil value), and TLS 1.3 servers which request client certificates (by setting Config.ClientAuth \u003e= RequestClientCert).",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.19.6]",
+        "[1.20.1]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-41724",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-426748",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2023-1570",
+        "https://groups.google.com/g/golang-announce/c/V0aBFqaFs_E",
+        "https://go.dev/issue/58001",
+        "https://go.dev/cl/468125"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "On Windows, restricted files can be accessed via os.DirFS and http.Dir. The os.DirFS function and http.Dir type provide access to a tree of files rooted at a given directory. These functions permit access to Windows device files under that root. For example, os.DirFS(\"C:/tmp\").Open(\"COM1\") opens the COM1 device. Both os.DirFS and http.Dir only provide read-only filesystem access. In addition, on Windows, an os.DirFS for the directory (the root of the current drive) can permit a maliciously crafted path to escape from the drive and access any path on the system. With fix applied, the behavior of os.DirFS(\"\") has changed. Previously, an empty root was treated equivalently to \"/\", so os.DirFS(\"\").Open(\"tmp\") would open the path \"/tmp\". This now returns an error.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.18.9]",
+        "[1.19.4]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-41720",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-263271",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-1143",
+        "https://groups.google.com/g/golang-announce/c/L_3rmdT0BMU/m/yZDrXjIiBQAJ",
+        "https://go.dev/issue/56694",
+        "https://go.dev/cl/455716"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Insufficient input validation in Golang allows attackers to perform path traversal via os.DirFS and http.dir.",
+        "details": "[Golang](https://go.dev/) is a statically typed, compiled programming language.\r\n\r\nDue to insufficient checks in `os.DirFS` and `http.dir`, an attacker can perform path traversal and access any files on the system (according to the user's access).\r\n\r\nThere are multiple ways to trigger this vulnerability -\r\n\r\nOn Linux, opening an empty directory tree (`\"\"`) will be mistakenly treated as opening the root (`/`).\r\nAn example that will mistakenly open `/tmp`:\r\n`os.DirFS(\"\").Open(\"tmp\")`\r\n\r\nOn Windows, the affected functions mistakenly permitted access to Windows-reserved device names (for example `COM1` or `NUL`).\r\nAn example that will open `COM1` (works with any argument to `DirFS`):\r\n`os.DirFS(\"C:/tmp\").Open(\"COM1\")`\r\n\r\nAnother way to trigger the issue on Windows would be using ```os.DirFS(`\\`)``` which will permit an attacker to escape from the drive and access any path on the system (including network shares).",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find a remote service that takes user input and specifically opens a file after calling the `os.DirFS()` or `http.dir()` functions. Refer to the full applicability conditions in the full description.",
+            "isPositive": true
+          },
+          {
+            "name": "The issue has an exploit published",
+            "description": "GitHub Issue contains PoC snippets with multiple ways to trigger the vulnerability."
+          },
+          {
+            "name": "The impact of exploiting the issue depends on the context of surrounding software. A severe impact such as RCE is not guaranteed.",
+            "description": "The security impact of exploiting this vulnerability highly depends on the 1st-party code that uses `os.DirFS()` or `http.dir()`.\r\nFor example, if the code uses `os.DirFS(\"\").Open(attacker_filename)` in order to create an attacker-named externally-writable file in the current directory, the attacker will actually be able to create the file in an arbitrary filepath, leading to arbitrary file overwrite",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "Go before 1.16.10 and 1.17.x before 1.17.3 allows an archive/zip Reader.Open panic via a crafted ZIP archive containing an invalid name or an empty filename field.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.16.10]",
+        "[1.17.3]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-41772",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-189375",
+      "references": [
+        "https://www.oracle.com/security-alerts/cpujul2022.html",
+        "https://groups.google.com/g/golang-announce/c/0fM21h43arc",
+        "https://cert-portal.siemens.com/productcert/pdf/ssa-744259.pdf",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4OFS3M3OFB24SWPTIAPARKGPUMQVUY6Z/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ON7BQRRJZBOR5TJHURBAB3WLF4YXFC6Z/",
+        "https://security.netapp.com/advisory/ntap-20211210-0003/"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "regexp.Compile in Go before 1.16.15 and 1.17.x before 1.17.8 allows stack exhaustion via a deeply nested expression.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.16.15]",
+        "[1.17.8]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-24921",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-199345",
+      "references": [
+        "https://lists.debian.org/debian-lts-announce/2022/04/msg00018.html",
+        "https://lists.debian.org/debian-lts-announce/2022/04/msg00017.html",
+        "https://cert-portal.siemens.com/productcert/pdf/ssa-744259.pdf",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://security.netapp.com/advisory/ntap-20220325-0010/",
+        "https://groups.google.com/g/golang-announce/c/RP1hfrBYVuk"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "A too-short encoded message can cause a panic in Float.GobDecode and Rat GobDecode in math/big in Go before 1.17.13 and 1.18.5, potentially allowing a denial of service.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.13]",
+        "[1.18.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-32189",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-248645",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0537",
+        "https://groups.google.com/g/golang-announce/c/YqYYG87xB10",
+        "https://go.googlesource.com/go/+/055113ef364337607e3e72ed7d48df67fde6fc66",
+        "https://go.dev/issue/53871",
+        "https://go.dev/cl/417774"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "An out-of-bounds read in Go's math/big module leads to denial of service.",
+        "details": "Go has a special module for big numbers: `math/big`. The `big` package implements arbitrary-precision arithmetic for signed integers, rational numbers and floating-point numbers.\r\n\r\nA crafted input can cause the `GobDecode` function to panic which leads to a denial of service.\r\n\r\nThe exploitation is trivial and a PoC has been published. The attacker must find a remote input that propagates into `Float.GobDecode()` or `Rat.GobDecode()` functions.",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The issue is trivial to exploit and does not require a published writeup or PoC",
+            "description": "The following code is enough to cause a denial of service: \r\n```\r\nFloat0 := big.NewFloat(0.0)\r\nFloat0.GobDecode([]byte{0x1, 0x0, 0x0, 0x0})\r\n```\r\nIt can be tested [here](https://go.dev/play/p/-iOX1cXown9)."
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find a remote input that propagates into the `Float.GobDecode()` or `Rat.GobDecode()` functions",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "Go before 1.12.10 and 1.13.x before 1.13.1 allow HTTP Request Smuggling.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.12.10]",
+        "[1.13.1]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2019-16276",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-89115",
+      "references": [
+        "http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00043.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00044.html",
+        "https://access.redhat.com/errata/RHSA-2020:0652",
+        "https://access.redhat.com/errata/RHSA-2020:0329",
+        "https://access.redhat.com/errata/RHSA-2020:0101",
+        "https://lists.debian.org/debian-lts-announce/2021/03/msg00015.html",
+        "https://lists.debian.org/debian-lts-announce/2021/03/msg00014.html",
+        "https://groups.google.com/forum/#!msg/golang-announce/cszieYyuL9Q/g4Z7pKaqAgAJ",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/O7GMJ3VXF5RXK2C7CL66KJ6XOOTOL5BJ/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/Q5MD2F7ATWSTB45ZJIPJHBAAHVRGRAKG/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/LULL72EUUKIY4NWDZVJVN2LIB4MXHS5P/",
+        "https://security.netapp.com/advisory/ntap-20191122-0004/",
+        "https://github.com/golang/go/issues/34540"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Code injection in the go command with cgo before Go 1.14.12 and Go 1.15.5 allows arbitrary code execution at build time via malicious gcc flags specified via a #cgo directive.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.14.12]",
+        "[1.15.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2020-28367",
+          "cvssV2": "5.1",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-128578",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0476",
+        "https://go.googlesource.com/go/+/da7aa86917811a571e6634b45a457f918b8e6561",
+        "https://go.dev/issue/42556",
+        "https://go.dev/cl/267277",
+        "https://groups.google.com/g/golang-announce/c/NpBGTTmKzpM"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "The go command line tool improperly validates CGO flags which could lead to arbitrary code injection on the development system.",
+        "details": "The go command line tool, when used to build untrusted code, such as by running `go get` on a malicious package, could run arbitrary malicious code on the system it is executed on. This vulnerability will most likely be relevant to developer machines, where new, potentially malicious packages could be downloaded and built by the developer. This issue is similar to [CVE-202-28366](https://nvd.nist.gov/vuln/detail/CVE-2020-28366) which was fixed in the same Go versions.",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "Exploiting the issue requires the user to interact with the vulnerable software",
+            "description": "For running `go get` on a malicious package",
+            "isPositive": true
+          },
+          {
+            "name": "The prerequisites for exploiting the issue are extremely unlikely",
+            "description": "Unlikely that go get will be run with a malicious package name",
+            "isPositive": true
+          },
+          {
+            "name": "The issue can be exploited by attackers over the network"
+          }
+        ],
+        "remediation": "##### Deployment mitigations\n\nSet the environment variable CGO_ENABLED to 0 when building packages using `go build` or `go get`."
+      }
+    },
+    {
+      "summary": "Uncontrolled recursion in Unmarshal in encoding/xml before Go 1.17.12 and Go 1.18.4 allows an attacker to cause a panic due to stack exhaustion via unmarshalling an XML document into a Go struct which has a nested field that uses the 'any' field tag.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.12]",
+        "[1.18.4]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-30633",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-248630",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0523",
+        "https://groups.google.com/g/golang-announce/c/nqrv9fbR0zE",
+        "https://go.googlesource.com/go/+/c4c1993fd2a5b26fe45c09592af6d3388a3b2e08",
+        "https://go.dev/issue/53611",
+        "https://go.dev/cl/417061"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Uncontrolled recursion in Golang encoding/xml.Unmarshal leads to denial of service when processing attacker-supplied XML documents into structs with the \"any\" field tag.",
+        "details": "The `Unmarshal` method allows deserializing XML documents into Golang types.\r\n\r\nIt was discovered that Unmarshaling an XML document into a Go struct which has a nested field that uses the 'any' field tag can panic due to stack exhaustion, which will crash the calling Go process.\r\n\r\nExample code snippet vulnerable to this issue -\r\n```go\r\n// Need a struct that uses the \"any\" field tag\r\ntype nested struct {\r\n\tParent *nested `xml:\",any\"`\r\n}\r\n\r\nvar vulnerable_struct nested\r\nerr := Unmarshal(attacker_input, \u0026vulnerable_struct)\r\n```",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The issue has an exploit published",
+            "description": "Published PoC in test code demonstrates denial of service"
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find remote input that propagates into a `encoding/xml.Unmarshal` API call (first argument) while the `Unmarshal` 2nd argument points to a struct that has the `any` field tag",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "ImportedSymbols in debug/macho (for Open or OpenFat) in Go before 1.16.10 and 1.17.x before 1.17.3 Accesses a Memory Location After the End of a Buffer, aka an out-of-bounds slice situation.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.16.10]",
+        "[1.17.3]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-41771",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-189376",
+      "references": [
+        "https://www.oracle.com/security-alerts/cpujul2022.html",
+        "https://lists.debian.org/debian-lts-announce/2022/01/msg00017.html",
+        "https://lists.debian.org/debian-lts-announce/2022/01/msg00016.html",
+        "https://groups.google.com/g/golang-announce/c/0fM21h43arc",
+        "https://cert-portal.siemens.com/productcert/pdf/ssa-744259.pdf",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4OFS3M3OFB24SWPTIAPARKGPUMQVUY6Z/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ON7BQRRJZBOR5TJHURBAB3WLF4YXFC6Z/",
+        "https://security.netapp.com/advisory/ntap-20211210-0003/"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "The generic P-256 feature in crypto/elliptic in Go before 1.17.9 and 1.18.x before 1.18.1 allows a panic via long scalar input.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.9]",
+        "[1.18.1]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-28327",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-208920",
+      "references": [
+        "https://groups.google.com/g/golang-announce",
+        "https://cert-portal.siemens.com/productcert/pdf/ssa-744259.pdf",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ZY2SLWOQR4ZURQ7UBRZ7JIX6H6F5JHJR/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/RCRSABD6CUDIZULZPZL5BJ3ET3A2NEJP/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/F3BMW5QGX53CMIJIZWKXFKBJX2C5GWTY/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/Z55VUVGO7E5PJFXIOVAY373NZRHBNCI5/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/42TYZC4OAY54TO75FBEFAPV5G7O4D5TM/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NY6GEAJMNKKMU5H46QO4D7D6A24KSPXE/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/RQXU752ALW53OJAF5MG3WMR5CCZVLWW6/",
+        "https://security.netapp.com/advisory/ntap-20220915-0010/",
+        "https://groups.google.com/g/golang-announce/c/oecdBNLOml8"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "A denial of service is possible from excessive resource consumption in net/http and mime/multipart. Multipart form parsing with mime/multipart.Reader.ReadForm can consume largely unlimited amounts of memory and disk files. This also affects form parsing in the net/http package with the Request methods FormFile, FormValue, ParseMultipartForm, and PostFormValue. ReadForm takes a maxMemory parameter, and is documented as storing \"up to maxMemory bytes +10MB (reserved for non-file parts) in memory\". File parts which cannot be stored in memory are stored on disk in temporary files. The unconfigurable 10MB reserved for non-file parts is excessively large and can potentially open a denial of service vector on its own. However, ReadForm did not properly account for all memory consumed by a parsed form, such as map entry overhead, part names, and MIME headers, permitting a maliciously crafted form to consume well over 10MB. In addition, ReadForm contained no limit on the number of disk files created, permitting a relatively small request body to create a large number of disk temporary files. With fix, ReadForm now properly accounts for various forms of memory overhead, and should now stay within its documented limit of 10MB + maxMemory bytes of memory consumption. Users should still be aware that this limit is high and may still be hazardous. In addition, ReadForm now creates at most one on-disk temporary file, combining multiple form parts into a single temporary file. The mime/multipart.File interface type's documentation states, \"If stored on disk, the File's underlying concrete type will be an *os.File.\". This is no longer the case when a form contains more than one file part, due to this coalescing of parts into a single file. The previous behavior of using distinct files for each form part may be reenabled with the environment variable GODEBUG=multipartfiles=distinct. Users should be aware that multipart.ReadForm and the http.Request methods that call it do not limit the amount of disk consumed by temporary files. ",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.19.6]",
+        "[1.20.1]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-41725",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-426747",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2023-1569",
+        "https://groups.google.com/g/golang-announce/c/V0aBFqaFs_E",
+        "https://go.dev/issue/58006",
+        "https://go.dev/cl/468124"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Uncontrolled recursion in Decoder.Skip in encoding/xml before Go 1.17.12 and Go 1.18.4 allows an attacker to cause a panic due to stack exhaustion via a deeply nested XML document.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.12]",
+        "[1.18.4]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-28131",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-248652",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0521",
+        "https://groups.google.com/g/golang-announce/c/nqrv9fbR0zE",
+        "https://go.googlesource.com/go/+/08c46ed43d80bbb67cb904944ea3417989be4af3",
+        "https://go.dev/issue/53614",
+        "https://go.dev/cl/417062"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Uncontrolled recursion in Golang encoding/xml.Decoder.Skip leads to denial of service when processing attacker-supplied XML documents.",
+        "details": "Golang provides support for iterating over an XML document by using the `Decoder` object supplied by the [encoding/xml](https://pkg.go.dev/encoding/xml) package. The `Decoder` object also supports skipping over XML elements (including their nested children) by calling the `Skip` method recursively.\r\n\r\nIt was discovered that when given a deeply nested XML document, the `(*Decoder).Skip` method will recurse many times, which may lead to stack exhaustion. This could cause the calling Golang process to crash.\r\n\r\nThe issue was fixed by replacing the recursion portion of the function with a depth counter. The depth counter will increase for each new start token, and while the depth counter is not 0, will decrease for each new end token.\r\n\r\nWhile `(*Decoder).Skip` may not be used directly, it is called by the widely used `(*Decoder).Decode`, `(*Decoder).DecodeElement` and `Unmarshal` functions.\r\n\r\nExample code snippets that are vulnerable to this issue -\r\n```go\r\ndecoder := xml.NewDecoder(attacker_input)\r\nerr := decoder.Skip()\r\n```\r\n\r\n```go\r\nerr := xml.Unmarshal(attacker_input, result_object)\r\n```\r\n\r\nThe vulnerable behavior can be exploited by attackers to cause denial of service, by providing crafted, deeply nested XML documents to one of the following API functions (from `encoding/xml`):\r\n\r\n1. `(*Decoder).Skip`\r\n2. `(*Decoder).Decode`\r\n3. `(*Decoder).DecodeElement`\r\n4. `Unmarshal`",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The issue has an exploit published",
+            "description": "Published PoC in test code demonstrates denial of service"
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find remote input that propagates into an `encoding/xml.Unmarshal` API call (first argument) or an `encoding/xml.NewDecoder` API call (first argument). In the latter case, the created decoder type must then also call either the `Skip`, `Decode` or `DecodeElement` methods.",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "Requests forwarded by ReverseProxy include the raw query parameters from the inbound request, including unparseable parameters rejected by net/http. This could permit query parameter smuggling when a Go proxy forwards a parameter with an unparseable value. After fix, ReverseProxy sanitizes the query parameters in the forwarded query when the outbound request's Form field is set after the ReverseProxy. Director function returns, indicating that the proxy has parsed the query parameters. Proxies which do not parse query parameters continue to forward the original query parameters unchanged.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.18.7]",
+        "[1.19.2]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-2880",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-257609",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-1038",
+        "https://groups.google.com/g/golang-announce/c/xtuG5faxtaU",
+        "https://go.dev/issue/54663",
+        "https://go.dev/cl/432976"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Insufficient input validation in Golang net/http/httputil and net/url may enable attackers to perform filter bypass \u0026 parameter smuggling.",
+        "details": "Golang's [net/http/httputil](https://pkg.go.dev/net/http/httputil) package provides HTTP utility functions, complementing the ones in Golang's net/http package.\r\n\r\nGolang's [net/http](https://pkg.go.dev/net/http) package provides HTTP client and server implementations in Golang.\r\n\r\nGolang's [net/url](https://pkg.go.dev/net/url) package is used for parsing URLs and query escaping.\r\n\r\nIn Go 1.17, URL parsing was changed to reject keys containing a semicolon. But despite the function `net/url.ParseQuery` being changed to raise an error when given a parameter with `;`, the function `net/url.URL.Query`, which calls the `net/url.ParseQuery`, ignores any error returned by it. Furthermore, the function `net/http/httputils.NewSingleHostReverseProxy` does not parse the query at all and sends the raw query to the backend.\r\n\r\nThis means that when there's a version discrepancy between the frontend and the backend - where the frontend uses a Go 1.17 or later, and the backend uses Go 1.16.x or earlier - it is possible for attackers to use parameter smuggling in order to bypass possible filters.\r\n\r\nTake for example the fictional website `https://mysite`, which uses Go 1.18 for its frontend and Go 1.16 for its backend. When going to `https://mysite/home`, the user's name is added as a parameter, e.g.  `https://mysite/home?name=sam`. In addition to the `name` parameter, it is possible to add a `role` parameter, which can be set to either `user` or `admin`. When the parameter is set to `admin` the frontend checks whether the user's name is that of an admin or not before forwarding the query to the backend.\r\n\r\nHowever,  when an attacker sends a request such as `https://mysite/home?role=admin;\u0026name=regularuser`, and the frontend parses it using `net/url.URL.Query`, the function will only return the `name=regularuser` parameter and raise no error. Since the frontend deems the request valid, it will pass it to the backend using `net/http/httputils.NewSingleHostReverseProxy`, which will pass the raw query instead of the parsed query from `net/url.URL.Query` to the backend. When the backend parses the query, both `name=regularuser` and `role=admin` will be returned. Thus, the attacker bypassed the frontend's filter.\r\n\r\nThe vulnerability does not exist if the frontend and the backend both use Go before 1.17 or Go after 1.17.",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The issue has a detailed technical explanation published, that can aid in exploit development"
+          },
+          {
+            "name": "The impact of exploiting the issue depends on the context of surrounding software. A severe impact such as RCE is not guaranteed.",
+            "description": "The impact of the vulnerability depends on the parameters that can be given to the URL and their effects.",
+            "isPositive": true
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "- The attacker has to know that the frontend/proxy and backend of the target both use Golang, and that the frontend/proxy use Go 1.17 or later, while the backend uses an earlier version of Go (before 1.17).\r\n- They also need to know that there isn't any additional sanitization on the URL before parsing the query or sending it to the backend through the proxy.\r\n- The attacker should find a vulnerable parameter that can be exploited with a meaningful applicative impact.",
+            "isPositive": true
+          },
+          {
+            "name": "The issue is trivial to exploit and does not require a published writeup or PoC",
+            "description": "A simple addition of the `;` character to a vulnerable parameter can lead to successful exploitation.\r\nThere are several exploitation examples of this issue online and it is trivial to create a new one when a vulnerable application is found."
+          }
+        ],
+        "remediation": "##### Development mitigations\n\nUse `net/url.ParseQuery` instead of `net/url.URL.Query`, and check for errors returned by it."
+      }
+    },
+    {
+      "summary": "Go before 1.14.14 and 1.15.x before 1.15.7 on Windows is vulnerable to Command Injection and remote code execution when using the \"go get\" command to fetch modules that make use of cgo (for example, cgo can execute a gcc program from an untrusted download).",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.14.14]",
+        "[1.15.7]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-3115",
+          "cvssV2": "5.1",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-139137",
+      "references": [
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YWAYJGXWC232SG3UR3TR574E6BP3OSQQ/",
+        "https://security.netapp.com/advisory/ntap-20210219-0001/",
+        "https://groups.google.com/g/golang-announce/c/mperVMGa98w",
+        "https://blog.golang.org/path-security"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Go before 1.15.13 and 1.16.x before 1.16.5 has functions for DNS lookups that do not validate replies from DNS servers, and thus a return value may contain an unsafe injection (e.g., XSS) that does not conform to the RFC1035 format.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.15.13]",
+        "[1.16.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-33195",
+          "cvssV2": "7.5",
+          "cvssV3": "7.3"
+        }
+      ],
+      "issueId": "XRAY-180703",
+      "references": [
+        "https://groups.google.com/g/golang-announce/c/RgCMkAEQjSI",
+        "https://groups.google.com/g/golang-announce",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://security.netapp.com/advisory/ntap-20210902-0005/"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "In archive/zip in Go before 1.16.8 and 1.17.x before 1.17.1, a crafted archive header (falsely designating that many files are present) can cause a NewReader or OpenReader panic. NOTE: this issue exists because of an incomplete fix for CVE-2021-33196.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.16.8]",
+        "[1.17.1]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-39293",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-196313",
+      "references": [
+        "https://security.netapp.com/advisory/ntap-20220217-0009/",
+        "https://groups.google.com/g/golang-announce/c/dx9d7IOseHw",
+        "https://cert-portal.siemens.com/productcert/pdf/ssa-222547.pdf"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Uncontrolled recursion in Reader.Read in compress/gzip before Go 1.17.12 and Go 1.18.4 allows an attacker to cause a panic due to stack exhaustion via an archive containing a large number of concatenated 0-length compressed files.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.12]",
+        "[1.18.4]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-30631",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-248648",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0524",
+        "https://groups.google.com/g/golang-announce/c/nqrv9fbR0zE",
+        "https://go.googlesource.com/go/+/b2b8872c876201eac2d0707276c6999ff3eb185e",
+        "https://go.dev/issue/53168",
+        "https://go.dev/cl/417067"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Uncontrolled recursion in Golang compress/gzip.Reader.Read leads to denial of service when processing attacker-supplied gzip archives.",
+        "details": "Golang provides the [compress/gzip](https://pkg.go.dev/compress/gzip) package in order to compress and decompress GZIP archives.\r\n\r\nIt was discovered that calling `Reader.Read` on an archive containing a large number of concatenated 0-length compressed files can cause a panic due to stack exhaustion, which will crash the calling Go process.\r\n\r\nExample code snippet that is vulnerable to this issue -\r\n```go\r\nr := bytes.NewReader(attacker_input)\r\nz, err := NewReader(r)\r\n_, err = z.Read(make([]byte, 10)) // Specific arguments here are irrelevant\r\n```",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The issue has an exploit published",
+            "description": "Published PoC in test code demonstrates denial of service"
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The target program must decompress an attacker-supplied gzip archive. More specifically - the attacker must find remote input that propagates into a `compress/gzip.Reader.Read` API call.",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "Programs which compile regular expressions from untrusted sources may be vulnerable to memory exhaustion or denial of service. The parsed regexp representation is linear in the size of the input, but in some cases the constant factor can be as high as 40,000, making relatively small regexps consume much larger amounts of memory. After fix, each regexp being parsed is limited to a 256 MB memory footprint. Regular expressions whose representation would use more space than that are rejected. Normal use of regular expressions is unaffected.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.18.7]",
+        "[1.19.2]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-41715",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-257703",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-1039",
+        "https://groups.google.com/g/golang-announce/c/xtuG5faxtaU",
+        "https://go.dev/issue/55949",
+        "https://go.dev/cl/439356"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Unbounded resource consumption in Golang regexp/syntax enables attackers to perform denial of service when compiling or parsing crafted regular expressions.",
+        "details": "Golang's [regexp/syntax](https://pkg.go.dev/regexp/syntax) package enables parsing of regular expressions into parse (syntax) trees and compiling parse trees into programs.\r\n\r\nIt was discovered that the parsed regexp representation had an unbounded memory footprint, and in some cases relatively small regexps can consume much larger amounts of memory. The issue was fixed by rejecting parse trees which consume more than 256MB of memory.\r\n\r\nWhile the `regexp/syntax` package by itself is not that popular, however, the vulnerable function `syntax.Parse` is used by multiple functions from the much more popular `regexp` package.\r\n\r\nAttackers can trigger the vulnerability by giving a large or complicated regexp to one of the following API functions:\r\n\r\nFrom `regexp/syntax`:\r\n\r\n1. `Parse`\r\n\r\nFrom `regexp`:\r\n\r\n1. `Match`\r\n2. `MatchReader`\r\n3. `MatchString`\r\n4. `Regexp.Compile`\r\n5. `Regexp.CompilePOSIX`\r\n6. `Regexp.MustCompile`\r\n7. `Regexp.MustCompilePOSIX`",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The issue has an exploit published",
+            "description": "PoC from test code demonstrates DoS"
+          },
+          {
+            "name": "The reported CVSS was either wrongly calculated, downgraded by other vendors, or does not reflect the vulnerability's impact",
+            "description": "CVSS doesn't take into account the high attack complexity of this attack, since the researcher must find a remote input for regular expressions to be compiled",
+            "isPositive": true
+          },
+          {
+            "name": "The issue cannot result in a severe impact (such as remote code execution)",
+            "description": "Linear complexity memory consumption (albeit the linear constant can be 40KB per 1 regex character)",
+            "isPositive": true
+          },
+          {
+            "name": "The prerequisites for exploiting the issue are extremely unlikely",
+            "description": "The attacker must find remote input that propagates into the `Parse` API, either directly or through a vulnerable function in the more popular `regexp` package. This is very unlikely since regular expressions are usually not compiled from untrusted sources.",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "Code injection in the go command with cgo before Go 1.14.12 and Go 1.15.5 allows arbitrary code execution at build time via a malicious unquoted symbol name in a linked object file.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.14.12]",
+        "[1.15.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2020-28366",
+          "cvssV2": "5.1",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-128619",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0475",
+        "https://go.googlesource.com/go/+/062e0e5ce6df339dc26732438ad771f73dbf2292",
+        "https://go.dev/issue/42559",
+        "https://go.dev/cl/269658",
+        "https://groups.google.com/g/golang-announce/c/NpBGTTmKzpM"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "The go command line tool does not filter malicious symbols which could lead to arbitrary code injection on the development system.",
+        "details": "The go command line tool, when used to build untrusted code, such as by running `go get` on a malicious package, could run arbitrary malicious code on the system it is executed on. This vulnerability will most likely be relevant to developer machines, where new, potentially malicious packages could be downloaded and built by the developer. This issue is similar to [CVE-2020-28367](https://nvd.nist.gov/vuln/detail/CVE-2020-28367) which was fixed in the same Go versions.",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The prerequisites for exploiting the issue are extremely unlikely",
+            "description": "Unlikely that go get will be run with a malicious package name",
+            "isPositive": true
+          },
+          {
+            "name": "Exploiting the issue requires the user to interact with the vulnerable software",
+            "description": "For running `go get` on a malicious package",
+            "isPositive": true
+          },
+          {
+            "name": "The prerequisites for exploiting the issue are extremely unlikely",
+            "isPositive": true
+          },
+          {
+            "name": "The issue has no exploit published",
+            "isPositive": true
+          },
+          {
+            "name": "The issue can be exploited by attackers over the network"
+          },
+          {
+            "name": "The CVE has no published technical writeup",
+            "isPositive": true
+          }
+        ],
+        "remediation": "##### Deployment mitigations\n\nSet the environment variable CGO_ENABLED to 0 when building packages using `go build` or `go get`."
+      }
+    },
+    {
+      "summary": "Go before 1.10.8 and 1.11.x before 1.11.5 mishandles P-521 and P-384 elliptic curves, which allows attackers to cause a denial of service (CPU consumption) or possibly conduct ECDH private key recovery attacks.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.10.8]",
+        "[1.11.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2019-6486",
+          "cvssV2": "6.4",
+          "cvssV3": "8.2"
+        }
+      ],
+      "issueId": "XRAY-75663",
+      "references": [
+        "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00015.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00011.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-05/msg00060.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-04/msg00042.html",
+        "https://lists.debian.org/debian-lts-announce/2019/02/msg00009.html",
+        "https://github.com/google/wycheproof",
+        "https://www.debian.org/security/2019/dsa-4380",
+        "https://www.debian.org/security/2019/dsa-4379",
+        "https://groups.google.com/forum/#!topic/golang-announce/mVeX35iXuSw",
+        "https://github.com/golang/go/issues/29903",
+        "https://github.com/golang/go/commit/42b42f71cf8f5956c09e66230293dfb5db652360",
+        "http://www.securityfocus.com/bid/106740"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Uncontrolled resource consumption in crypto/elliptic in Go can lead to denial of service.",
+        "details": "[Go](https://go.dev) is a statically typed, compiled programming language designed at Google. It is syntactically similar to C, but with memory safety, garbage collection, structural typing, and CSP-style concurrency. \r\n\r\nGo-based applications that perform cryptographic operations using the Go [crypto/elliptic](https://pkg.go.dev/crypto/elliptic) implementation of the P-521 and P-384 [elliptic curves](https://qvault.io/cryptography/elliptic-curve-cryptography/) could be vulnerable to Denial of Service (DoS) as certain operations could consume significant CPU resources which would lead to noticeable lags and even DoS of the application. Elliptic curves would usually be used by applications as part of the TLS handshake process or when using X.509 certificates, JWT tokens or ECDSA signatures. Specifically, in the `doubleJacobian` function there is an addition loop with a stop condition that is based on the value of an integer (beta) that could be controlled by an attacker (for example by a rogue TLS server during handshaking). If the attacker would provide a very large value to the `beta` integer, then the addition loop would take a long time to finish.",
+        "severity": "High",
+        "severityReasons": [
+          {
+            "name": "The issue can be exploited by attackers over the network",
+            "description": "When the `crypto/elliptic` library is used for a TLS handshake (for example, when using Go's `net/http` TLS server functionality), the vulnerability can be triggered remotely"
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "Outside of a TLS handshake, an attacker would need to find a remote input that propagates into the `ScalarMult` function",
+            "isPositive": true
+          },
+          {
+            "name": "The issue has an exploit published",
+            "description": "An exploit is published as part of Google's Wycheproof project"
+          }
+        ]
+      }
+    },
+    {
+      "summary": "In Go before 1.10.6 and 1.11.x before 1.11.3, the \"go get\" command is vulnerable to remote code execution when executed with the -u flag and the import path of a malicious Go package, or a package that imports it directly or indirectly. Specifically, it is only vulnerable in GOPATH mode, but not in module mode (the distinction is documented at https://golang.org/cmd/go/#hdr-Module_aware_go_get). Using custom domains, it's possible to arrange things so that a Git repository is cloned to a folder named \".git\" by using a vanity import path that ends with \"/.git\". If the Git repository root contains a \"HEAD\" file, a \"config\" file, an \"objects\" directory, a \"refs\" directory, with some work to ensure the proper ordering of operations, \"go get -u\" can be tricked into considering the parent directory as a repository root, and running Git commands on it. That will use the \"config\" file in the original Git repository root for its configuration, and if that config file contains malicious commands, they will execute on the system running \"go get -u\".",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.10.6]",
+        "[1.11.3]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2018-16873",
+          "cvssV2": "6.8",
+          "cvssV3": "8.1"
+        }
+      ],
+      "issueId": "XRAY-75848",
+      "references": [
+        "http://lists.opensuse.org/opensuse-security-announce/2020-04/msg00041.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-07/msg00010.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00015.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00011.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-05/msg00060.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-03/msg00044.html",
+        "https://lists.debian.org/debian-lts-announce/2021/03/msg00015.html",
+        "https://lists.debian.org/debian-lts-announce/2021/03/msg00014.html",
+        "https://groups.google.com/forum/?pli=1#!topic/golang-announce/Kw31K8G7Fi0",
+        "https://security.gentoo.org/glsa/201812-09",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-16873",
+        "http://www.securityfocus.com/bid/106226"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Uncontrolled recursion in Glob in path/filepath before Go 1.17.12 and Go 1.18.4 allows an attacker to cause a panic due to stack exhaustion via a path containing a large number of path separators.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.12]",
+        "[1.18.4]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-30632",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-248631",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0522",
+        "https://groups.google.com/g/golang-announce/c/nqrv9fbR0zE",
+        "https://go.googlesource.com/go/+/ac68c6c683409f98250d34ad282b9e1b0c9095ef",
+        "https://go.dev/issue/53416",
+        "https://go.dev/cl/417066"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Uncontrolled recursion in Golang path/filepath.Glob leads to denial of service when processing attacker-supplied Glob patterns.",
+        "details": "The `Glob` command allows listing files with \"Glob\" patterns - path strings which may contain wildcard characters such as `*` and `?` which match any character.\r\n\r\nIt was discovered that calling `Glob` on a path which contains a large number of path separators can cause  panic due to stack exhaustion, which will crash the calling Go process.\r\nExample code snippet that triggers the issue -\r\n```go\r\n_, err := Glob(\"/*\" + strings.Repeat(\"/\", 10001))\r\n```\r\nNote that it is unlikely that remote attackers will be able to control glob patterns",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The prerequisites for exploiting the issue are extremely unlikely",
+            "description": "It is unlikely that remote attackers will be able to control a Glob pattern. The severity of this issue being exploited by a local attacker is limited.",
+            "isPositive": true
+          },
+          {
+            "name": "The issue has an exploit published",
+            "description": "Published PoC in test code demonstrates denial of service"
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find remote input that propagates into a `Glob` API call (first argument)",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "Go through 1.12 on Windows misuses certain LoadLibrary functionality, leading to DLL injection.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.11.10]",
+        "[1.12.2]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2019-9634",
+          "cvssV2": "6.8",
+          "cvssV3": "7.8"
+        }
+      ],
+      "issueId": "XRAY-79289",
+      "references": [
+        "http://www.openwall.com/lists/oss-security/2019/04/09/1",
+        "https://github.com/golang/go/issues/30642",
+        "http://www.securityfocus.com/bid/107450"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "encoding/pem in Go before 1.17.9 and 1.8.x before 1.8.1 has a Decode stack overflow via a large amount of PEM data.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.9]",
+        "[1.18.1]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-24675",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-208841",
+      "references": [
+        "https://groups.google.com/g/golang-announce",
+        "https://groups.google.com/g/golang-announce/c/oecdBNLOml8"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "A stack exhaustion in Golang when decoding PEM data leads to denial of service.",
+        "details": "[Go](https://go.dev/) is a statically typed, compiled programming language designed at Google. It is syntactically similar to C, but with memory safety, garbage collection, structural typing, and CSP-style concurrency. It is often referred to as Golang because of its former domain name, golang.org, but its proper name is Go.\r\n\r\nGo offers multiple built-in packages. One of them is [PEM package](https://pkg.go.dev/encoding/pem), responsible for encoding and decoding PEM data like TLS keys or certificates. \r\n\r\nThe PEM's data decoding can be compromised to cause a stack overflow/exhaustion and thus, a denial of service. The bug was proven to be triggered when decoding a large PEM data containing errors. Errors were triggering a recursive call the `Decode` function itself. Recursive calls fill up the calling stack until the crash. \r\n\r\nThe bug was fixed in Go version 1.18.1 and 1.17.9. A proof-of-concept was [published](https://go-review.googlesource.com/c/go/+/399820/1/src/encoding/pem/pem_test.go#164) as a test case.",
+        "severity": "High",
+        "severityReasons": [
+          {
+            "name": "The issue has an exploit published",
+            "description": "Crashing PoC test case"
+          },
+          {
+            "name": "The issue has multiple mentions in general media"
+          },
+          {
+            "name": "The prerequisites for exploiting the issue are either extremely common or nonexistent (always exploitable)",
+            "description": "Network software tends to decode PEM data from untrusted sources (ex. SSL certificates)"
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find a remote input that propagates into a PEM `Decode` call",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "In archive/zip in Go before 1.15.13 and 1.16.x before 1.16.5, a crafted file count (in an archive's header) can cause a NewReader or OpenReader panic.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.15.13]",
+        "[1.16.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-33196",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-180702",
+      "references": [
+        "https://lists.debian.org/debian-lts-announce/2022/01/msg00017.html",
+        "https://lists.debian.org/debian-lts-announce/2022/01/msg00016.html",
+        "https://groups.google.com/g/golang-announce/c/RgCMkAEQjSI",
+        "https://groups.google.com/g/golang-announce",
+        "https://security.gentoo.org/glsa/202208-02"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "cmd/go in Go before 1.16.14 and 1.17.x before 1.17.7 can misinterpret branch names that falsely appear to be version tags. This can lead to incorrect access control if an actor is supposed to be able to create branches but not tags.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.16.14]",
+        "[1.17.7]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-23773",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-198037",
+      "references": [
+        "https://www.oracle.com/security-alerts/cpujul2022.html",
+        "https://groups.google.com/g/golang-announce/c/SUsQn0aSgPQ",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://security.netapp.com/advisory/ntap-20220225-0006/"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "A spoofing vulnerability exists in the way Windows CryptoAPI (Crypt32.dll) validates Elliptic Curve Cryptography (ECC) certificates.An attacker could exploit the vulnerability by using a spoofed code-signing certificate to sign a malicious executable, making it appear the file was from a trusted, legitimate source, aka 'Windows CryptoAPI Spoofing Vulnerability'.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.12.16]",
+        "[1.13.7]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2020-0601",
+          "cvssV2": "5.8",
+          "cvssV3": "8.1"
+        }
+      ],
+      "issueId": "XRAY-246851",
+      "references": [
+        "https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-0601",
+        "http://packetstormsecurity.com/files/155961/CurveBall-Microsoft-Windows-CryptoAPI-Spoofing-Proof-Of-Concept.html",
+        "http://packetstormsecurity.com/files/155960/CurveBall-Microsoft-Windows-CryptoAPI-Spoofing-Proof-Of-Concept.html"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Due to unsanitized NUL values, attackers may be able to maliciously set environment variables on Windows. In syscall.StartProcess and os/exec.Cmd, invalid environment variable values containing NUL values are not properly checked for. A malicious environment variable value can exploit this behavior to set a value for a different environment variable. For example, the environment variable string \"A=B\\x00C=D\" sets the variables \"A=B\" and \"C=D\".",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.18.8]",
+        "[1.19.3]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-41716",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-260471",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-1095",
+        "https://groups.google.com/g/golang-announce/c/mbHY1UY3BaM/m/hSpmRzk-AgAJ",
+        "https://go.dev/issue/56284",
+        "https://go.dev/cl/446916"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Insufficient input validation in Golang allows attackers to set arbitrary environment variables.",
+        "details": "[Golang](https://go.dev/) is a statically typed, compiled programming language.\r\n\r\nIt was discovered that due to insufficient checks in `syscall.StartProcess` and `os/exec.Cmd`, an attacker can overwrite arbitrary environment variables.\r\n\r\nThe vulnerability only applies to Windows systems, as an attacker needs to make use of the `NUL` value.\r\n\r\nAn example:\r\nThe environment variable string `A=B\\x00C=D` will set the environment variables `A=B` and `C=D`.",
+        "severity": "Low",
+        "severityReasons": [
+          {
+            "name": "The prerequisites for exploiting the issue are extremely unlikely",
+            "description": "This only applies to Windows systems.",
+            "isPositive": true
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The code needs to use user input as an environment variable to trigger this vulnerability.",
+            "isPositive": true
+          },
+          {
+            "name": "The issue can be exploited by attackers over the network",
+            "description": "When a remote attacker has access to set environment variables through a network endpoint that takes user input- this vulnerability will also be remotely exploitable."
+          }
+        ]
+      }
+    },
+    {
+      "summary": "The crypto/x509 package of Go before 1.10.6 and 1.11.x before 1.11.3 does not limit the amount of work performed for each chain verification, which might allow attackers to craft pathological inputs leading to a CPU denial of service. Go TLS servers accepting client certificates and TLS clients are affected.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.10.6]",
+        "[1.11.3]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2018-16875",
+          "cvssV2": "7.8",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-75846",
+      "references": [
+        "http://lists.opensuse.org/opensuse-security-announce/2019-07/msg00010.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00015.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00011.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-05/msg00060.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-03/msg00044.html",
+        "https://groups.google.com/forum/?pli=1#!topic/golang-announce/Kw31K8G7Fi0",
+        "https://security.gentoo.org/glsa/201812-09",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-16875",
+        "http://www.securityfocus.com/bid/106230"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Infinite loop in Read in crypto/rand before Go 1.17.11 and Go 1.18.3 on Windows allows attacker to cause an indefinite hang by passing a buffer larger than 1 \u003c\u003c 32 - 1 bytes.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.11]",
+        "[1.18.3]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-30634",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-231116",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0477",
+        "https://groups.google.com/g/golang-announce/c/TzIC9-t8Ytg/m/IWz5T6x7AAAJ",
+        "https://go.googlesource.com/go/+/bb1f4416180511231de6d17a1f2f55c82aafc863",
+        "https://go.dev/issue/52561",
+        "https://go.dev/cl/402257"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Reader.Read does not set a limit on the maximum size of file headers. A maliciously crafted archive could cause Read to allocate unbounded amounts of memory, potentially causing resource exhaustion or panics. After fix, Reader.Read limits the maximum size of header blocks to 1 MiB.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.18.7]",
+        "[1.19.2]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-2879",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-257610",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-1037",
+        "https://groups.google.com/g/golang-announce/c/xtuG5faxtaU",
+        "https://go.dev/issue/54853",
+        "https://go.dev/cl/439355"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Insufficient input validation in Golang archive/tar enables attackers to perform denial of service via a maliciously crafted tar archive.",
+        "details": "Golang's [tar](https://pkg.go.dev/archive/tar) module provides access to reading and writing tar archives.\r\n\r\nIn the archive/tar module, the functions `Reader.parsePax`, and `Reader.next` do not limit the maximum size of file header's, which could cause an out of memory error when crafted files are parsed. \r\n\r\nAttackers can trigger the vulnerability by uploading a maliciously crafted tar archive with large headers, which subsequently needs to get processed via `tar.NewReader` and `Reader.Next`.",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The prerequisites for exploiting the issue are either extremely common or nonexistent (always exploitable)",
+            "description": "It is likely that Golang's tar module will be used to process untrusted tar archives"
+          },
+          {
+            "name": "The issue has an exploit published",
+            "description": "Test code contains a DoS PoC"
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker has to be able to upload tar archives which subsequently get processed via `tar.NewReader` and `Reader.Next`",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "A path traversal vulnerability exists in filepath.Clean on Windows. On Windows, the filepath.Clean function could transform an invalid path such as \"a/../c:/b\" into the valid path \"c:\\b\". This transformation of a relative (if invalid) path into an absolute path could enable a directory traversal attack. After fix, the filepath.Clean function transforms this path into the relative (but still invalid) path \".\\c:\\b\".",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.19.6]",
+        "[1.20.1]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-41722",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-426750",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2023-1568",
+        "https://groups.google.com/g/golang-announce/c/V0aBFqaFs_E",
+        "https://go.dev/issue/57274",
+        "https://go.dev/cl/468123"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Uncontrolled recursion in Glob in io/fs before Go 1.17.12 and Go 1.18.4 allows an attacker to cause a panic due to stack exhaustion via a path which contains a large number of path separators.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.12]",
+        "[1.18.4]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-30630",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-248649",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0527",
+        "https://groups.google.com/g/golang-announce/c/nqrv9fbR0zE",
+        "https://go.googlesource.com/go/+/fa2d41d0ca736f3ad6b200b2a4e134364e9acc59",
+        "https://go.dev/issue/53415",
+        "https://go.dev/cl/417065"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Uncontrolled recursion in Golang io/fs.Glob leads to denial of service when processing attacker-supplied Glob patterns.",
+        "details": "The `Glob` command allows listing files with \"Glob\" patterns - path strings which may contain wildcard characters such as `*` and `?` which match any character.\r\n\r\nIt was discovered that calling `Glob` on a path which contains a large number of path separators can cause  panic due to stack exhaustion, which will crash the calling Go process.\r\nExample code snippet that triggers the issue -\r\n```go\r\n_, err := Glob(fs, \"/*\" + strings.Repeat(\"/\", 10001))\r\n```\r\nNote that it is unlikely that remote attackers will be able to control glob patterns",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The prerequisites for exploiting the issue are extremely unlikely",
+            "description": "It is unlikely that remote attackers will be able to control a Glob pattern. The severity of this issue being exploited by a local attacker is limited.",
+            "isPositive": true
+          },
+          {
+            "name": "The issue has an exploit published",
+            "description": "Published PoC in test code demonstrates denial of service"
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find remote input that propagates into a `Glob` API call (first argument)",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "Rat.SetString in math/big in Go before 1.16.14 and 1.17.x before 1.17.7 has an overflow that can lead to Uncontrolled Memory Consumption.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.16.14]",
+        "[1.17.7]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-23772",
+          "cvssV2": "7.8",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-197973",
+      "references": [
+        "https://www.oracle.com/security-alerts/cpujul2022.html",
+        "https://lists.debian.org/debian-lts-announce/2022/04/msg00018.html",
+        "https://lists.debian.org/debian-lts-announce/2022/04/msg00017.html",
+        "https://groups.google.com/g/golang-announce/c/SUsQn0aSgPQ",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://security.netapp.com/advisory/ntap-20220225-0006/"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Uncontrolled recursion in Decoder.Decode in encoding/gob before Go 1.17.12 and Go 1.18.4 allows an attacker to cause a panic due to stack exhaustion via a message which contains deeply nested structures.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.12]",
+        "[1.18.4]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-30635",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-248647",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0526",
+        "https://groups.google.com/g/golang-announce/c/nqrv9fbR0zE",
+        "https://go.googlesource.com/go/+/6fa37e98ea4382bf881428ee0c150ce591500eb7",
+        "https://go.dev/issue/53615",
+        "https://go.dev/cl/417064"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Uncontrolled recursion in Golang encoding/gob.Decoder.Decode leads to denial of service when decoding attacker-supplied Gob streams.",
+        "details": "Golang supports an optimized encoder/decoder called \"gob\" for binary values exchanged between an Encoder (transmitter) and a Decoder (receiver). A typical use is transporting arguments and results of remote procedure calls (RPCs) such as those provided by package \"net/rpc\".\r\n\r\nIt was discovered that calling `Decoder.Decode` on a message which contains deeply nested structures can cause a panic due to stack exhaustion., which will crash the calling Go process.\r\n\r\nExample code snippet vulnerable to this issue-\r\n```go\r\ndec := NewDecoder(attacker_input)\r\ndec.Decode(\u0026output)\r\n```",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The issue has an exploit published",
+            "description": "Published PoC in test code demonstrates denial of service"
+          },
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find remote input that propagates into a `NewDecoder` API call (first argument). The built `Decoder` must then invoke the `Decode` call",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "encoding/xml in Go before 1.15.9 and 1.16.x before 1.16.1 has an infinite loop if a custom TokenReader (for xml.NewTokenDecoder) returns EOF in the middle of an element. This can occur in the Decode, DecodeElement, or Skip method.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.15.9]",
+        "[1.16.1]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-27918",
+          "cvssV2": "5.0",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-145876",
+      "references": [
+        "https://groups.google.com/g/golang-announce/c/MfiLYjG-RAw",
+        "https://security.gentoo.org/glsa/202208-02"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Incorrect conversion of certain invalid paths to valid, absolute paths in Clean in path/filepath before Go 1.17.11 and Go 1.18.3 on Windows allows potential directory traversal attack.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.11]",
+        "[1.18.3]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-29804",
+          "cvssV2": "",
+          "cvssV3": "7.5"
+        }
+      ],
+      "issueId": "XRAY-248632",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0533",
+        "https://groups.google.com/g/golang-announce/c/TzIC9-t8Ytg/m/IWz5T6x7AAAJ",
+        "https://go.googlesource.com/go/+/9cd1818a7d019c02fa4898b3e45a323e35033290",
+        "https://go.dev/issue/52476",
+        "https://go.dev/cl/401595"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Invalid input validation in Golang filepath.Clean may lead to filter bypass when cleaning crafted filepaths on Windows.",
+        "details": "Golang's [filepath.Clean](https://pkg.go.dev/path/filepath#Clean) method returns the shortest path name **equivalent** to the input path by purely lexical processing.\r\n\r\nIt was discovered that on Windows, the method transformed some invalid filepaths into valid unexpected filepaths, specifically - \r\n```go\r\nfilepath.Clean(`.\\c:`)     // `c:`     Input is an invalid path; Output points to drive C\r\nfilepath.Clean(`.\\c:\\foo`) // `c:\\foo` Input is an invalid path; Output is an absolute path\r\nfilepath.Clean(`.\\c:foo`)  // `c:foo`  Input points to ADS `foo` of file `.\\c`; Output points to `foo` on drive C\r\n```\r\n\r\nThe original advisory contained a severe implication of this issue, where starting an HTTP server based on the \"net/http\" module, which is supposed to be restricted to the current directory, would actually serve files from any absolute path - \r\n```go\r\npackage main\r\n\r\nimport \"net/http\"\r\n\r\nfunc main() {\r\n\thttp.ListenAndServe(\":8080\", http.FileServer(http.Dir(\".\")))\r\n}\r\n```\r\nRequesting `http://localhost:8080/c:/Users/` lists the directory contents of `C:\\Users\\`.",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The attacker must find remote input that propagates into the `filepath.Clean` method",
+            "isPositive": true
+          },
+          {
+            "name": "The impact of exploiting the issue depends on the context of surrounding software. A severe impact such as RCE is not guaranteed.",
+            "description": "The impact highly depends on how the attacker-controlled path is used after it's been cleaned. An attacker can supply an invalid path which would be transformed into either a drive letter, an absolute path or an ADS (alternate data stream)",
+            "isPositive": true
+          },
+          {
+            "name": "The issue is trivial to exploit and does not require a published writeup or PoC",
+            "description": "An attacker simply needs to supply a string prefixed with `.\\c:` to `filepath.Clean`"
+          }
+        ]
+      }
+    },
+    {
+      "summary": "Code injection in Cmd.Start in os/exec before Go 1.17.11 and Go 1.18.3 allows execution of any binaries in the working directory named either \"..com\" or \"..exe\" by calling Cmd.Run, Cmd.Start, Cmd.Output, or Cmd.CombinedOutput when Cmd.Path is unset.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.11]",
+        "[1.18.3]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-30580",
+          "cvssV2": "",
+          "cvssV3": "7.8"
+        }
+      ],
+      "issueId": "XRAY-248651",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0532",
+        "https://groups.google.com/g/golang-announce/c/TzIC9-t8Ytg/m/IWz5T6x7AAAJ",
+        "https://go.googlesource.com/go/+/960ffa98ce73ef2c2060c84c7ac28d37a83f345e",
+        "https://go.dev/issue/52574",
+        "https://go.dev/cl/403759"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Execution path hijacking in Golang's Cmd.Run, Cmd.Start, Cmd.Output and Cmd.CombinedOutput allows for local privilege escalation.",
+        "details": "On Windows, executing `Cmd.Run`, `Cmd.Start`, `Cmd.Output`, or `Cmd.CombinedOutput` when `Cmd.Path` is unset will unintentionally trigger execution of any binaries in the working directory named either `..com` or `..exe` \r\n\r\nAn attacker that can plant a malicious executable in the same working directory as a vulnerable Go application, will achieve code execution in the privileges of the vulnerable Go application.\r\nNote that it is extremely rare that any of the vulnerable APIs will be called with `Cmd.Path` being unset.\r\n\r\nExample code that can trigger this issue -\r\n```go\r\nfunc TestNoPath(t *testing.T) {\r\n\terr := new(exec.Cmd).Start()\r\n\twant := \"exec: no command\"\r\n\tif err == nil || err.Error() != want {\r\n\t\tt.Errorf(\"new(Cmd).Start() = %v, want %q\", err, want)\r\n\t}\r\n}\r\n```\r\n```",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "Exploitation of the issue is only possible when the vulnerable component is used in a specific manner. The attacker has to perform per-target research to determine the vulnerable attack vector",
+            "description": "The vulnerable Go application must call `Cmd.Run`, `Cmd.Start`, `Cmd.Output`, or `Cmd.CombinedOutput` when `Cmd.Path` is unset. For example -\r\n```go\r\nerr := new(exec.Cmd).Start()\r\n```",
+            "isPositive": true
+          },
+          {
+            "name": "The prerequisites for exploiting the issue are extremely unlikely",
+            "description": "It is extremely rare that any of the vulnerable APIs will be called with `Cmd.Path` being unset. In addition, the attacker must be able to plant an executable named `..exe` or `..com` in the working directory of the vulnerable Go app.",
+            "isPositive": true
+          },
+          {
+            "name": "The issue is trivial to exploit and does not require a published writeup or PoC",
+            "description": "An attacker simply needs to plant a malicious executable in a specified directory with a specified name"
+          },
+          {
+            "name": "The issue cannot result in a severe impact (such as remote code execution)",
+            "description": "Local privilege escalation with the privileges of the vulnerable Go application",
+            "isPositive": true
+          },
+          {
+            "name": "The issue can only be exploited by an attacker that can execute code on the vulnerable machine (excluding exceedingly rare circumstances)",
+            "description": "The attacker must be able to plant a malicious executable in a specified directory with a specified name",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "In Go before 1.10.6 and 1.11.x before 1.11.3, the \"go get\" command is vulnerable to directory traversal when executed with the import path of a malicious Go package which contains curly braces (both '{' and '}' characters). Specifically, it is only vulnerable in GOPATH mode, but not in module mode (the distinction is documented at https://golang.org/cmd/go/#hdr-Module_aware_go_get). The attacker can cause an arbitrary filesystem write, which can lead to code execution.",
+      "severity": "High",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.10.6]",
+        "[1.11.3]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2018-16874",
+          "cvssV2": "6.8",
+          "cvssV3": "8.1"
+        }
+      ],
+      "issueId": "XRAY-75847",
+      "references": [
+        "http://lists.opensuse.org/opensuse-security-announce/2020-04/msg00041.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-07/msg00010.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00015.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00011.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-05/msg00060.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2019-03/msg00044.html",
+        "https://lists.debian.org/debian-lts-announce/2021/03/msg00015.html",
+        "https://lists.debian.org/debian-lts-announce/2021/03/msg00014.html",
+        "https://groups.google.com/forum/?pli=1#!topic/golang-announce/Kw31K8G7Fi0",
+        "https://security.gentoo.org/glsa/201812-09",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-16874",
+        "http://www.securityfocus.com/bid/106228"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "The crypto/tls package of Go through 1.16.5 does not properly assert that the type of public key in an X.509 certificate matches the expected type when doing a RSA based key exchange, allowing a malicious TLS server to cause a TLS client to panic.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.15.14]",
+        "[1.16.6]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-34558",
+          "cvssV2": "2.6",
+          "cvssV3": "6.5"
+        }
+      ],
+      "issueId": "XRAY-179699",
+      "references": [
+        "https://www.oracle.com/security-alerts/cpuoct2021.html",
+        "https://www.oracle.com/security-alerts/cpujan2022.html",
+        "https://groups.google.com/g/golang-announce/c/n9FxMelZGAQ",
+        "https://groups.google.com/g/golang-announce",
+        "https://golang.org/doc/devel/release#go1.16.minor",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/6BTC3JQUASFN5U2XA4UZIGAPZQBD5JSS/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NLOGBB7XBBRB3J5FDPW5KWHSH7IRF64W/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/LBMLUQMN6XRKPVOI5XFFBP4XSR7RNTYR/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ITRXPCHUCJGXCX2CUEPKZRRTB27GG4ZB/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/WXJ2MVMAHOIGRH37ZSFYC4EVWLJFL2EQ/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/JYIUSR4YP52PWG7YE7AA3DZ5OSURNFJB/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/D7FRFM7WWR2JCT6NORQ7AO6B453OMI3I/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/3BA7MFVXRBEKRTLSLYDICTYCGEMK2HZ7/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/3XBQUFVI5TMV4KMKI7GKA223LHGPQISE/",
+        "https://security.netapp.com/advisory/ntap-20210813-0005/"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": {
+        "summary": "Insufficient input in crypto/tls in go allows a network attacker to perform denial of service by providing a certificate of the wrong type.",
+        "details": "Golang's `crypto/tls` handles TLS sessions including key exchanges. When `crypto/tls` receives the \r\nwrong type of certificate (according to the negotiated type) the client can crash due to \r\ninsufficient certificate checks.\r\nThe vulnerability affects `net/http` clients too when using TLS under the same conditions.\r\nThere is a PoC already [published](https://github.com/alexzorin/cve-2021-34558) online, demonstrating the `crypto/tls` and `net/http` crash.\r\n\r\nThe crash can be triggered by a local network attacker that uses a MitM attack to redirect a `net/http`-based client to a malicious TLS server. The crash can be triggered by an attacker even without access to the server’s private key, as long as a trusted ECDSA or Ed25519 certificate for the server exists or the client is configured with `Config.InsecureSkipVerify `.",
+        "severity": "Medium",
+        "severityReasons": [
+          {
+            "name": "The issue has an exploit published",
+            "description": "Exploit fully demonstrates a malicious server that causes client crashes"
+          },
+          {
+            "name": "The issue cannot result in a severe impact (such as remote code execution)",
+            "description": "Denial of service in client applications",
+            "isPositive": true
+          },
+          {
+            "name": "The issue can be exploited by attackers over the network",
+            "description": "Remotely exploitable by local network attackers that perform MitM"
+          },
+          {
+            "name": "The prerequisites for exploiting the issue are extremely unlikely",
+            "description": "In order to trigger the crash, a trusted ECDSA or Ed25519 certificate for the server must exist, or the client is must be configured with `Config.InsecureSkipVerify` (meaning that the client does not validate the TLS certificate). Clients that do not validate the TLS certificate are prone to much more severe attacks through SSL MitM.",
+            "isPositive": true
+          }
+        ]
+      }
+    },
+    {
+      "summary": "In Go before 1.14.14 and 1.15.x before 1.15.7, crypto/elliptic/p224.go can generate incorrect outputs, related to an underflow of the lowest limb during the final complete reduction in the P-224 field.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.14.14]",
+        "[1.15.7]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-3114",
+          "cvssV2": "6.4",
+          "cvssV3": "6.5"
+        }
+      ],
+      "issueId": "XRAY-139164",
+      "references": [
+        "https://lists.debian.org/debian-lts-announce/2021/03/msg00015.html",
+        "https://lists.debian.org/debian-lts-announce/2021/03/msg00014.html",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/YWAYJGXWC232SG3UR3TR574E6BP3OSQQ/",
+        "https://www.debian.org/security/2021/dsa-4848",
+        "https://security.netapp.com/advisory/ntap-20210219-0001/",
+        "https://groups.google.com/g/golang-announce/c/mperVMGa98w",
+        "https://github.com/golang/go/commit/d95ca9138026cbe40e0857d76a81a16d03230871"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Go before 1.15.15 and 1.16.x before 1.16.7 has a race condition that can lead to a net/http/httputil ReverseProxy panic upon an ErrAbortHandler abort.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.15.15]",
+        "[1.16.7]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-36221",
+          "cvssV2": "4.3",
+          "cvssV3": "5.9"
+        }
+      ],
+      "issueId": "XRAY-181818",
+      "references": [
+        "https://lists.debian.org/debian-lts-announce/2022/01/msg00017.html",
+        "https://lists.debian.org/debian-lts-announce/2022/01/msg00016.html",
+        "https://www.oracle.com/security-alerts/cpujan2022.html",
+        "https://groups.google.com/g/golang-announce/c/uHACNfXAZqk",
+        "https://groups.google.com/g/golang-announce/c/JvWG9FUUYT0",
+        "https://groups.google.com/forum/#!forum/golang-announce",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/HM7U5JNS5WU66Q3S26PFIU2ITB2ATTQ4/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/2MU47VKTNXX33ZDLTI2ORRUY3KLJKU6G/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/J4AMYYHGBYMIWCCR5RCDFI5RAUJOPO5L/",
+        "https://cert-portal.siemens.com/productcert/pdf/ssa-222547.pdf"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Uncontrolled recursion in the Parse functions in go/parser before Go 1.17.12 and Go 1.18.4 allow an attacker to cause a panic due to stack exhaustion via deeply nested types or declarations.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.12]",
+        "[1.18.4]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-1962",
+          "cvssV2": "",
+          "cvssV3": "5.5"
+        }
+      ],
+      "issueId": "XRAY-248653",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0515",
+        "https://groups.google.com/g/golang-announce/c/nqrv9fbR0zE",
+        "https://go.googlesource.com/go/+/695be961d57508da5a82217f7415200a11845879",
+        "https://go.dev/issue/53616",
+        "https://go.dev/cl/417063"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "In Go before 1.15.13 and 1.16.x before 1.16.5, some configurations of ReverseProxy (from net/http/httputil) result in a situation where an attacker is able to drop arbitrary headers.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.15.13]",
+        "[1.16.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-33197",
+          "cvssV2": "4.3",
+          "cvssV3": "5.3"
+        }
+      ],
+      "issueId": "XRAY-180701",
+      "references": [
+        "https://groups.google.com/g/golang-announce/c/RgCMkAEQjSI",
+        "https://groups.google.com/g/golang-announce",
+        "https://security.gentoo.org/glsa/202208-02"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Improper exposure of client IP addresses in net/http before Go 1.17.12 and Go 1.18.4 can be triggered by calling httputil.ReverseProxy.ServeHTTP with a Request.Header map containing a nil value for the X-Forwarded-For header, which causes ReverseProxy to set the client IP as the value of the X-Forwarded-For header.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.12]",
+        "[1.18.4]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-32148",
+          "cvssV2": "",
+          "cvssV3": "6.5"
+        }
+      ],
+      "issueId": "XRAY-248646",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0520",
+        "https://groups.google.com/g/golang-announce/c/nqrv9fbR0zE",
+        "https://go.googlesource.com/go/+/b2cc0fecc2ccd80e6d5d16542cc684f97b3a9c8a",
+        "https://go.dev/issue/53423",
+        "https://go.dev/cl/412857"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Acceptance of some invalid Transfer-Encoding headers in the HTTP/1 client in net/http before Go 1.17.12 and Go 1.18.4 allows HTTP request smuggling if combined with an intermediate server that also improperly fails to reject the header as invalid.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.12]",
+        "[1.18.4]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-1705",
+          "cvssV2": "",
+          "cvssV3": "6.5"
+        }
+      ],
+      "issueId": "XRAY-248633",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0525",
+        "https://groups.google.com/g/golang-announce/c/nqrv9fbR0zE",
+        "https://go.googlesource.com/go/+/e5017a93fcde94f09836200bca55324af037ee5f",
+        "https://go.dev/issue/53188",
+        "https://go.dev/cl/410714",
+        "https://go.dev/cl/409874"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "The encoding/xml package in Go (all versions) does not correctly preserve the semantics of element namespace prefixes during tokenization round-trips, which allows an attacker to craft inputs that behave in conflicting ways during different stages of processing in affected downstream applications.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.15.6]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2020-29511",
+          "cvssV2": "6.8",
+          "cvssV3": "5.6"
+        }
+      ],
+      "issueId": "XRAY-134983",
+      "references": [
+        "https://github.com/mattermost/xml-roundtrip-validator/blob/master/advisories/unstable-elements.md"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Go before 1.14.8 and 1.15.x before 1.15.1 allows XSS because text/html is the default for CGI/FCGI handlers that lack a Content-Type header.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.14.8]",
+        "[1.15.1]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2020-24553",
+          "cvssV2": "4.3",
+          "cvssV3": "6.1"
+        }
+      ],
+      "issueId": "XRAY-122286",
+      "references": [
+        "http://lists.opensuse.org/opensuse-security-announce/2020-10/msg00002.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2020-10/msg00000.html",
+        "https://www.oracle.com//security-alerts/cpujul2021.html",
+        "https://www.redteam-pentesting.de/advisories/rt-sa-2020-004",
+        "https://www.oracle.com/security-alerts/cpuApr2021.html",
+        "https://groups.google.com/forum/#!topic/golang-announce/8wqlSbkLdPs",
+        "http://packetstormsecurity.com/files/159049/Go-CGI-FastCGI-Transport-Cross-Site-Scripting.html",
+        "http://seclists.org/fulldisclosure/2020/Sep/5",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/CZBO7Q73GGWBVYIKNH2HNN44Q5IQND5W/",
+        "https://security.netapp.com/advisory/ntap-20200924-0003/"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "The encoding/xml package in Go versions 1.15 and earlier does not correctly preserve the semantics of directives during tokenization round-trips, which allows an attacker to craft inputs that behave in conflicting ways during different stages of processing in affected downstream applications.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.15.6]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2020-29510",
+          "cvssV2": "6.8",
+          "cvssV3": "5.6"
+        }
+      ],
+      "issueId": "XRAY-134984",
+      "references": [
+        "https://github.com/mattermost/xml-roundtrip-validator/blob/master/advisories/unstable-directives.md"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "In Go before 1.13.13 and 1.14.x before 1.14.5, Certificate.Verify may lack a check on the VerifyOptions.KeyUsages EKU requirements (if VerifyOptions.Roots equals nil and the installation is on Windows). Thus, X.509 certificate verification is incomplete.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.13.13]",
+        "[1.14.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2020-14039",
+          "cvssV2": "5.0",
+          "cvssV3": "5.3"
+        }
+      ],
+      "issueId": "XRAY-114289",
+      "references": [
+        "http://lists.opensuse.org/opensuse-security-announce/2020-09/msg00030.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2020-09/msg00029.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2020-07/msg00082.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2020-07/msg00077.html",
+        "https://www.oracle.com/security-alerts/cpuApr2021.html",
+        "https://groups.google.com/forum/#!forum/golang-announce",
+        "https://security.netapp.com/advisory/ntap-20200731-0005/",
+        "https://groups.google.com/forum/#!topic/golang-announce/XZNfaiwgt2w"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Go before 1.16.12 and 1.17.x before 1.17.5 on UNIX allows write operations to an unintended file or unintended network connection as a consequence of erroneous closing of file descriptor 0 after file-descriptor exhaustion.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.16.12]",
+        "[1.17.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2021-44717",
+          "cvssV2": "5.8",
+          "cvssV3": "4.8"
+        }
+      ],
+      "issueId": "XRAY-193494",
+      "references": [
+        "https://lists.debian.org/debian-lts-announce/2022/01/msg00017.html",
+        "https://lists.debian.org/debian-lts-announce/2022/01/msg00016.html",
+        "https://cert-portal.siemens.com/productcert/pdf/ssa-744259.pdf",
+        "https://security.gentoo.org/glsa/202208-02",
+        "https://groups.google.com/g/golang-announce/c/hcmEScgc00k"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Go before 1.13.13 and 1.14.x before 1.14.5 has a data race in some net/http servers, as demonstrated by the httputil.ReverseProxy Handler, because it reads a request body and writes a response at the same time.",
+      "severity": "Medium",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.13.13]",
+        "[1.14.5]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2020-15586",
+          "cvssV2": "4.3",
+          "cvssV3": "5.9"
+        }
+      ],
+      "issueId": "XRAY-114287",
+      "references": [
+        "http://lists.opensuse.org/opensuse-security-announce/2020-09/msg00030.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2020-09/msg00029.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2020-07/msg00082.html",
+        "http://lists.opensuse.org/opensuse-security-announce/2020-07/msg00077.html",
+        "https://lists.debian.org/debian-lts-announce/2020/11/msg00038.html",
+        "https://lists.debian.org/debian-lts-announce/2020/11/msg00037.html",
+        "https://www.oracle.com/security-alerts/cpuApr2021.html",
+        "https://groups.google.com/forum/#!topic/golang-announce/f2c5bqrGH_g",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OCR6LAKCVKL55KJQPPBBWVQGOP7RL2RW/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/WIRVUHD7TJIT7JJ33FKHIVTHPYABYPHR/",
+        "https://www.debian.org/security/2021/dsa-4848",
+        "https://www.cloudfoundry.org/blog/cve-2020-15586/",
+        "https://security.netapp.com/advisory/ntap-20200731-0005/",
+        "https://groups.google.com/forum/#!topic/golang-announce/XZNfaiwgt2w"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Go Cryptography acme/autocert/cache.go Get() Function Path Traversal File Disclosure Weakness",
+      "severity": "Low",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": null,
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-30636",
+          "cvssV2": "",
+          "cvssV3": ""
+        },
+        {
+          "id": "",
+          "cvssV2": "2.6",
+          "cvssV3": "3.7"
+        }
+      ],
+      "issueId": "XRAY-227851",
+      "references": [
+        "https://go.googlesource.com/crypto/+/793ad666bf5ec61392092b27061be9618e4e219b",
+        "https://go-review.googlesource.com/c/crypto/+/408694/",
+        "https://github.com/golang/go/issues/53082",
+        "https://github.com/golang/crypto/commit/793ad666bf5ec61392092b27061be9618e4e219b",
+        "https://support2.windriver.com/index.php?page=cve\u0026on=view\u0026id=CVE-2022-30636",
+        "http://cve.mitre.org/cgi-bin/cvename.cgi?name=2022-30636"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "Non-random values for ticket_age_add in session tickets in crypto/tls before Go 1.17.11 and Go 1.18.3 allow an attacker that can observe TLS handshakes to correlate successive connections by comparing ticket ages during session resumption.",
+      "severity": "Low",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.17.11]",
+        "[1.18.3]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2022-30629",
+          "cvssV2": "",
+          "cvssV3": "3.1"
+        }
+      ],
+      "issueId": "XRAY-248650",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2022-0531",
+        "https://groups.google.com/g/golang-announce/c/TzIC9-t8Ytg/m/IWz5T6x7AAAJ",
+        "https://go.googlesource.com/go/+/fe4de36198794c447fbd9d7cc2d7199a506c76a5",
+        "https://go.dev/issue/52814",
+        "https://go.dev/cl/405994"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    },
+    {
+      "summary": "The ScalarMult and ScalarBaseMult methods of the P256 Curve may return an incorrect result if called with some specific unreduced scalars (a scalar larger than the order of the curve). This does not impact usages of crypto/ecdsa or crypto/ecdh.",
+      "severity": "Unknown",
+      "impactedPackageName": "github.com/golang/go",
+      "impactedPackageVersion": "1.10.3",
+      "impactedPackageType": "Go",
+      "fixedVersions": [
+        "[1.19.7]",
+        "[1.20.2]"
+      ],
+      "components": [
+        {
+          "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+          "version": ""
+        }
+      ],
+      "cves": [
+        {
+          "id": "CVE-2023-24532",
+          "cvssV2": "",
+          "cvssV3": ""
+        }
+      ],
+      "issueId": "XRAY-427380",
+      "references": [
+        "https://pkg.go.dev/vuln/GO-2023-1621",
+        "https://groups.google.com/g/golang-announce/c/3-TpUx48iQY",
+        "https://go.dev/issue/58647",
+        "https://go.dev/cl/471255"
+      ],
+      "impactPaths": [
+        [
+          {
+            "name": "example.com/defaultbackend-amd64",
+            "version": "1.5"
+          },
+          {
+            "name": "sha256__b108d49682334945ea82e3882dc47e85f7ea2fa1e98619d0135e3d8f23e71e9c.tar",
+            "version": ""
+          },
+          {
+            "name": "server",
+            "version": ""
+          },
+          {
+            "name": "github.com/golang/go",
+            "version": "1.10.3"
+          }
+        ]
+      ],
+      "jfrogResearchInformation": null
+    }
+  ],
+  "securityViolations": null,
+  "licensesViolations": null,
+  "licenses": null,
+  "operationalRiskViolations": null,
+  "errors": null
 }
