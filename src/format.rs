@@ -6,20 +6,20 @@ use serde::{Deserialize, Serialize};
 // This struct holds the sorted results of the simple-json output.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct SimpleJsonResults {
-	pub vulnerabilities: Vec<VulnerabilityOrViolationRow>,
+	pub vulnerabilities: Option<Vec<VulnerabilityOrViolationRow>>,
 
   #[serde(rename = "securityViolations")]
-	pub security_violations: Vec<VulnerabilityOrViolationRow>,
+	pub security_violations: Option<Vec<VulnerabilityOrViolationRow>>,
 
   #[serde(rename = "licensesViolations")]
-	pub licenses_violations: Vec<LicenseViolationRow>,
+	pub licenses_violations: Option<Vec<LicenseViolationRow>>,
 
-	pub licenses: Vec<LicenseRow>,
+	pub licenses: Option<Vec<LicenseRow>>,
 
   #[serde(rename = "operationalRiskViolations")]
-	pub operational_risk_violations: Vec<OperationalRiskViolationRow>,
+	pub operational_risk_violations: Option<Vec<OperationalRiskViolationRow>>,
 
-	pub errors: Vec<SimpleJsonError>,
+	pub errors: Option<Vec<SimpleJsonError>>,
 }
 
 // Used for vulnerabilities and security violations
@@ -38,10 +38,10 @@ pub struct VulnerabilityOrViolationRow {
 	pub impacted_dependency_type: String,
 
   #[serde(rename = "fixedVersions")]
-	pub fixed_versions: Vec<String>,
+	pub fixed_versions: Option<Vec<String>>,
 
 	pub components: Vec<ComponentRow>,
-	pub cves: Vec<CveRow>,
+	pub cves: Option<Vec<CveRow>>,
 
   #[serde(rename = "issueId")]
 	pub issue_id: String,
@@ -52,7 +52,7 @@ pub struct VulnerabilityOrViolationRow {
 	pub impact_paths: Vec<Vec<ComponentRow>>,
 
   #[serde(rename = "jfrogResearchInformation")]
-	pub jfrog_research_information: JfrogResearchInformation,
+	pub jfrog_research_information: Option<JfrogResearchInformation>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -157,21 +157,21 @@ pub struct SimpleJsonError {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct JfrogResearchInformation {
-	pub summary: String,
-	pub details: String,
-	pub severity: String,
+	pub summary: Option<String>,
+	pub details: Option<String>,
+	pub severity: Option<String>,
 
   #[serde(rename = "severityReasons")]
-	pub severity_reasons: Vec<JfrogResearchSeverityReason>,
+	pub severity_reasons: Option<Vec<JfrogResearchSeverityReason>>,
 
-	pub remediation: String,
+	pub remediation: Option<String>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct JfrogResearchSeverityReason {
-	pub name: String,
-	pub description: String,
+	pub name: Option<String>,
+	pub description: Option<String>,
 
   #[serde(rename = "isPositive")]
-	pub is_positive:  bool,
+	pub is_positive: Option<bool>,
 }
