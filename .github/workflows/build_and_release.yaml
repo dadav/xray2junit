@@ -13,14 +13,34 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
+  style:
+    name: Stylecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          components: rustfmt
+      - name: Check the code
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: -- --check
   build:
     name: Build for different targets
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        target:
-          - x86_64-unknown-linux-musl
-          - x86_64-unknown-linux-gnu
+        config:
+          - name: x86_64-musl
+            target: x86_64-unknown-linux-musl
+          - name: x86_64-gnu
+            target: x86_64-unknown-linux-gnu
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,20 +51,20 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-          target: ${{ matrix.target }}
+          target: ${{ matrix.config.target }}
 
       - name: Build
         uses: actions-rs/cargo@v1
         with:
           command: build
-          args: --release --target ${{ matrix.target }}
+          args: --release --target ${{ matrix.config.target }}
 
       - name: Create release tarballs
         if: startsWith(github.ref, 'refs/tags/')
         run: |
           mkdir -p artifacts
-          tar czf artifacts/${{ matrix.target }}-xray2junit.tar.gz \
-            -C target/${{ matrix.target }}/release/ xray2junit
+          tar czf artifacts/xray2junit-${{ matrix.config.name }}.tar.gz \
+            -C target/${{ matrix.config.target }}/release/ xray2junit
 
       - run: find artifacts
         if: startsWith(github.ref, 'refs/tags/')
