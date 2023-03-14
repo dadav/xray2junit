@@ -2,7 +2,7 @@
 
 <img alt="xray2junit demo" src="header.gif" width="600" />
 
-This program converts the output of `jfrog scan --output simple-json` to
+This program converts the output of `jfrog scan --format simple-json` to
 a junit report which can be used in gitlab-ci to display the results there.
 
 ## install
@@ -26,7 +26,7 @@ Options:
 ## usage
 
 ```bash
-jfrog scan --output simple-json . | xray2junit
+jfrog scan --format simple-json . | xray2junit
 ```
 
 Best used with gitlab-ci like this:
@@ -37,7 +37,7 @@ xray-job:
   before_script: |
     cargo install --git https://github.com/dadav/xray2junit.git
     export PATH=$PATH:~/.cargo/bin
-  script: jfrog scan --outpur simple-json | xray2junit -o report.xml
+  script: jfrog scan --format simple-json . | xray2junit -o report.xml
   artifacts:
     when: always
     paths:
