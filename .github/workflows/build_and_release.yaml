@@ -83,6 +83,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Install git-chglog
         run: GOBIN=/usr/local/bin/ go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
       - name: Generate Changelog
