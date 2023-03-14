@@ -1,6 +1,6 @@
-use std::io;
+use junit_report::{Duration, ReportBuilder, TestCase, TestSuite};
 use serde_json::Result as SerdeResult;
-use junit_report::{TestSuite,TestCase,ReportBuilder,Duration};
+use std::io;
 
 use crate::*;
 
@@ -43,7 +43,6 @@ impl SimpleJsonResults {
     }
 
     pub fn export(&self, output: impl io::Write) -> Result<(), Box<dyn std::error::Error>> {
-
         let mut vulnerabilities = TestSuite::new("Vulnerabilities");
 
         match &self.vulnerabilities {
@@ -51,7 +50,7 @@ impl SimpleJsonResults {
                 for vuln in vulns {
                     vulnerabilities.add_testcase(vuln.to_testcase());
                 }
-            },
+            }
             None => (),
         }
 
@@ -62,10 +61,9 @@ impl SimpleJsonResults {
                 for sec_vuln in secs {
                     security_violations.add_testcase(sec_vuln.to_testcase());
                 }
-            },
+            }
             None => (),
         }
-
 
         let mut license_violations = TestSuite::new("License Violations");
 
@@ -74,7 +72,7 @@ impl SimpleJsonResults {
                 for lic_vio in lics {
                     license_violations.add_testcase(lic_vio.to_testcase());
                 }
-            },
+            }
             None => (),
         }
 
@@ -85,12 +83,11 @@ impl SimpleJsonResults {
                 for op in ops {
                     op_risk_violations.add_testcase(op.to_testcase());
                 }
-            },
+            }
             None => (),
         }
 
-        let mut report = ReportBuilder::new()
-            .build();
+        let mut report = ReportBuilder::new().build();
 
         report.add_testsuite(vulnerabilities);
         report.add_testsuite(security_violations);
