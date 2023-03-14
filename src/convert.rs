@@ -7,10 +7,10 @@ use crate::*;
 impl VulnerabilityOrViolationRow {
     fn to_testcase(&self) -> TestCase {
         TestCase::failure(
-            &self.issue_id,
+            &format!("{} ({})", &self.issue_id, &self.severity),
             Duration::seconds(0),
-            &self.severity,
-            &self.summary,
+            "Vulnerability",
+            &format!("[{} (version: {})]: {}", &self.impacted_dependency_name, &self.impacted_dependency_version, &self.summary),
         )
     }
 }
@@ -18,10 +18,10 @@ impl VulnerabilityOrViolationRow {
 impl LicenseViolationRow {
     fn to_testcase(&self) -> TestCase {
         TestCase::failure(
-            &self.license_key,
+            &format!("{} ({})", &self.license_key, &self.severity),
             Duration::seconds(0),
-            &self.severity,
-            "foo",
+            "License Violation",
+            &format!("[{} (version: {})]: {}", &self.impacted_dependency_name, &self.impacted_dependency_version, &self.license_key),
         )
     }
 }
@@ -29,9 +29,9 @@ impl LicenseViolationRow {
 impl OperationalRiskViolationRow {
     fn to_testcase(&self) -> TestCase {
         TestCase::failure(
-            &self.risk_reason,
+            &format!("{} ({})", &self.impacted_dependency_name, &self.severity),
             Duration::seconds(0),
-            &self.severity,
+            "Operational Risk",
             &self.risk_reason,
         )
     }
@@ -51,7 +51,10 @@ impl SimpleJsonResults {
                     vulnerabilities.add_testcase(vuln.to_testcase());
                 }
             }
-            None => (),
+            None => vulnerabilities.add_testcase(TestCase::success(
+                "No vulnerabilities found.",
+                Duration::seconds(0),
+            )),
         }
 
         let mut security_violations = TestSuite::new("Security Violations");
@@ -62,7 +65,10 @@ impl SimpleJsonResults {
                     security_violations.add_testcase(sec_vuln.to_testcase());
                 }
             }
-            None => (),
+            None => security_violations.add_testcase(TestCase::success(
+                "No security violations found.",
+                Duration::seconds(0),
+            )),
         }
 
         let mut license_violations = TestSuite::new("License Violations");
@@ -73,7 +79,10 @@ impl SimpleJsonResults {
                     license_violations.add_testcase(lic_vio.to_testcase());
                 }
             }
-            None => (),
+            None => license_violations.add_testcase(TestCase::success(
+                "No license violations found.",
+                Duration::seconds(0),
+            )),
         }
 
         let mut op_risk_violations = TestSuite::new("Operational Risk Violations");
@@ -84,7 +93,10 @@ impl SimpleJsonResults {
                     op_risk_violations.add_testcase(op.to_testcase());
                 }
             }
-            None => (),
+            None => op_risk_violations.add_testcase(TestCase::success(
+                "No operational risk violations found.",
+                Duration::seconds(0),
+            )),
         }
 
         let mut report = ReportBuilder::new().build();
