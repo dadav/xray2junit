@@ -10,7 +10,10 @@ impl VulnerabilityOrViolationRow {
             &format!("{} ({})", &self.issue_id, &self.severity),
             Duration::seconds(0),
             "Vulnerability",
-            &format!("[{} (version: {})]: {}", &self.impacted_dependency_name, &self.impacted_dependency_version, &self.summary),
+            &format!(
+                "[{} (version: {})]: {}",
+                &self.impacted_dependency_name, &self.impacted_dependency_version, &self.summary
+            ),
         )
     }
 }
@@ -21,7 +24,12 @@ impl LicenseViolationRow {
             &format!("{} ({})", &self.license_key, &self.severity),
             Duration::seconds(0),
             "License Violation",
-            &format!("[{} (version: {})]: {}", &self.impacted_dependency_name, &self.impacted_dependency_version, &self.license_key),
+            &format!(
+                "[{} (version: {})]: {}",
+                &self.impacted_dependency_name,
+                &self.impacted_dependency_version,
+                &self.license_key
+            ),
         )
     }
 }
