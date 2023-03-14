@@ -1,5 +1,8 @@
 # xray2junit
 
+[![Latest Version](https://img.shields.io/github/v/release/dadav/xray2junit?display_name=tag&label=Latest%20version)](https://github.com/dadav/xray2junit/releases)
+[![License](https://img.shields.io/github/license/dadav/xray2junit?color=green)](https://github.com/dadav/xray2junit/blob/main/LICENSE)
+
 <img alt="xray2junit demo" src="header.gif" width="600" />
 
 This program converts the output of `jfrog scan --format simple-json` to
