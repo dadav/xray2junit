@@ -86,7 +86,7 @@ jobs:
       - name: Install git-chglog
         run: GOBIN=/usr/local/bin/ go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
       - name: Generate Changelog
-        run: git-chglog ${{ github.ref_name }} --output ${{ github.workspace }}-CHANGELOG.txt
+        run: git-chglog ${{ github.ref_name }} > ${{ github.workspace }}-CHANGELOG.txt
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
